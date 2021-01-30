@@ -1,0 +1,1 @@
+random=com.wangzhen.dubbox.loadbalance.loadbalancer.RandomLoadBalance

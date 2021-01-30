@@ -1,0 +1,92 @@
+Classfile /D:/workspace/java/router-cloud/jvmx/target/classes/com/wangzhen/jvm/App2.class
+  Last modified 2020-9-28; size 464 bytes
+  MD5 checksum 64f61f67c2ed9cf73e4b8f8737074b51
+  Compiled from "App2.java"
+public class App.App2
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #3.#18         // java/lang/Object."<init>":()V
+   #2 = Class              #19            // com/wangzhen/jvm/App2
+   #3 = Class              #20            // java/lang/Object
+   #4 = Utf8               <init>
+   #5 = Utf8               ()V
+   #6 = Utf8               Code
+   #7 = Utf8               LineNumberTable
+   #8 = Utf8               LocalVariableTable
+   #9 = Utf8               this
+  #10 = Utf8               Lcom/wangzhen/jvm/App2;
+  #11 = Utf8               test
+  #12 = Utf8               b
+  #13 = Utf8               I
+  #14 = Utf8               a
+  #15 = Utf8               StackMapTable
+  #16 = Utf8               SourceFile
+  #17 = Utf8               App2.java
+  #18 = NameAndType        #4:#5          // "<init>":()V
+  #19 = Utf8               com/wangzhen/jvm/App2
+  #20 = Utf8               java/lang/Object
+{
+  public App.App2();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 4: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/wangzhen/jvm/App2;
+
+  public void test();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=1
+         0: iconst_1
+         1: istore_1
+         2: iload_1
+         3: iconst_1
+         4: if_icmple     12
+         7: iconst_1
+         8: istore_2
+         9: goto          29
+        12: iload_1
+        13: iconst_1
+        14: if_icmpge     22
+        17: iconst_1
+        18: istore_2
+        19: goto          29
+        22: iload_1
+        23: iconst_1
+        24: if_icmpne     29
+        27: iconst_1
+        28: istore_2
+        29: return
+      LineNumberTable:
+        line 7: 0
+        line 9: 2
+        line 10: 7
+        line 11: 12
+        line 12: 17
+        line 13: 22
+        line 14: 27
+        line 16: 29
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            9       3     2     b   I
+           19       3     2     b   I
+            0      30     0  this   Lcom/wangzhen/jvm/App2;
+            2      28     1     a   I
+      StackMapTable: number_of_entries = 3
+        frame_type = 252 /* append */
+          offset_delta = 12
+          locals = [ int ]
+        frame_type = 9 /* same */
+        frame_type = 6 /* same */
+}
+SourceFile: "App2.java"

@@ -1,0 +1,125 @@
+警告: 二进制文件TestATHROW包含com.wangzhen.jvm.TestATHROW
+Classfile /Users/wangzhen/Desktop/workspace/java/jvm/jvmOnJava/jvmx/target/classes/com/wangzhen/jvm/TestATHROW.class
+  Last modified 2020-10-4; size 777 bytes
+  MD5 checksum 55282525d58adfb14b44f926cb55b218
+  Compiled from "TestATHROW.java"
+public class com.wangzhen.jvm.TestATHROW
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #8.#30         // java/lang/Object."<init>":()V
+   #2 = Methodref          #7.#31         // com/wangzhen/jvm/TestATHROW.test:()V
+   #3 = Methodref          #7.#32         // com/wangzhen/jvm/TestATHROW.fn:()V
+   #4 = Class              #33            // java/lang/NullPointerException
+   #5 = Class              #34            // java/lang/IndexOutOfBoundsException
+   #6 = Methodref          #5.#30         // java/lang/IndexOutOfBoundsException."<init>":()V
+   #7 = Class              #35            // com/wangzhen/jvm/TestATHROW
+   #8 = Class              #36            // java/lang/Object
+   #9 = Utf8               <init>
+  #10 = Utf8               ()V
+  #11 = Utf8               Code
+  #12 = Utf8               LineNumberTable
+  #13 = Utf8               LocalVariableTable
+  #14 = Utf8               this
+  #15 = Utf8               Lcom/wangzhen/jvm/TestATHROW;
+  #16 = Utf8               main
+  #17 = Utf8               ([Ljava/lang/String;)V
+  #18 = Utf8               args
+  #19 = Utf8               [Ljava/lang/String;
+  #20 = Utf8               test
+  #21 = Utf8               e
+  #22 = Utf8               Ljava/lang/NullPointerException;
+  #23 = Utf8               i
+  #24 = Utf8               I
+  #25 = Utf8               StackMapTable
+  #26 = Class              #33            // java/lang/NullPointerException
+  #27 = Utf8               fn
+  #28 = Utf8               SourceFile
+  #29 = Utf8               TestATHROW.java
+  #30 = NameAndType        #9:#10         // "<init>":()V
+  #31 = NameAndType        #20:#10        // test:()V
+  #32 = NameAndType        #27:#10        // fn:()V
+  #33 = Utf8               java/lang/NullPointerException
+  #34 = Utf8               java/lang/IndexOutOfBoundsException
+  #35 = Utf8               com/wangzhen/jvm/TestATHROW
+  #36 = Utf8               java/lang/Object
+{
+  public com.wangzhen.jvm.TestATHROW();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 9: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/wangzhen/jvm/TestATHROW;
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=0, locals=1, args_size=1
+         0: invokestatic  #2                  // Method test:()V
+         3: return
+      LineNumberTable:
+        line 11: 0
+        line 12: 3
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       4     0  args   [Ljava/lang/String;
+
+  public static void test();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=0
+         0: bipush        100
+         2: istore_0
+         3: invokestatic  #3                  // Method fn:()V
+         6: goto          14
+         9: astore_1
+        10: sipush        200
+        13: istore_0
+        14: sipush        300
+        17: istore_0
+        18: return
+      Exception table:
+         from    to  target type
+             3     6     9   Class java/lang/NullPointerException
+      LineNumberTable:
+        line 14: 0
+        line 16: 3
+        line 19: 6
+        line 17: 9
+        line 18: 10
+        line 20: 14
+        line 21: 18
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           10       4     1     e   Ljava/lang/NullPointerException;
+            3      16     0     i   I
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 9
+          locals = [ int ]
+          stack = [ class java/lang/NullPointerException ]
+        frame_type = 4 /* same */
+
+  public static void fn();
+    descriptor: ()V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: new           #5                  // class java/lang/IndexOutOfBoundsException
+         3: dup
+         4: invokespecial #6                  // Method java/lang/IndexOutOfBoundsException."<init>":()V
+         7: athrow
+      LineNumberTable:
+        line 23: 0
+}
+SourceFile: "TestATHROW.java"

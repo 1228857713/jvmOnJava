@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    window.onload = function(){
+        start();
+        function start() {
+            var myParent = document.getElementById("photo");
+            // var myImage = document.createElement("img");
+            // myImage.src = 'http://10.13.6.25/HRMS/Window/Image.aspx?objname=97473828A6475847B66878381887C678&ID=0004';
+            // var wangzhen = 6278
+            var start = 6200;
+            var end =  7000;
+            for (var i =start;i<end;i++){
+                var myImage = document.createElement("img");
+                myImage.src = 'http://10.13.6.25/HRMS/Window/Image.aspx?objname=97473828A6475847B66878381887C678&ID='+i;
+                myImage.width = 150;
+                myImage.height = 200;
+                myParent.appendChild(myImage);
+            }
+
+
+           // myImage.style.marginLeft = "50px";
+        }
+    }
+</script>
+<body>
+<div id = "photo">
+
+
+</div>
+</body>
+
+</html>

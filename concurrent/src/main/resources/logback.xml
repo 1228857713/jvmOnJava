@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+        xmlns="http://ch.qos.logback/xml/ns/logback"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback logback.xsd">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--%date{HH:mm:ss.SSS} %c -->
+            <pattern>%date{HH:mm:ss.SSS} %c [%t] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<logger name="org.springframework.security.web.FilterChainProxy" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+    <logger name="org.springframework.security.web.access.intercept.FilterSecurityInterceptor" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>-->
+
+    <!--<logger name="org.springframework.security.web" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>-->
+    <logger name="c" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
