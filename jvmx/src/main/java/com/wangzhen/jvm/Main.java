@@ -1,6 +1,5 @@
 package com.wangzhen.jvm;
 
-import com.wangzhen.jvm.classfile.classPackage.ClassFile;
 import com.wangzhen.jvm.classfile.classPath.ClassPath;
 import com.wangzhen.jvm.instructions.Interpreter;
 import com.wangzhen.jvm.runtimeData.ZFrame;
@@ -8,6 +7,7 @@ import com.wangzhen.jvm.runtimeData.ZThread;
 import com.wangzhen.jvm.runtimeData.helap.ZClass;
 import com.wangzhen.jvm.runtimeData.helap.ZClassLoader;
 import com.wangzhen.jvm.runtimeData.helap.ZMethod;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
 
 import java.util.Arrays;
@@ -18,6 +18,7 @@ import java.util.Arrays;
  *  1.启动参数
  * -cp jvmx/target/classes/com/wangzhen/jvm  app
  */
+@Slf4j
 public class Main {
     public static void main(String[] args) {
         // https://blog.csdn.net/yamaxifeng_132/article/details/87822812
@@ -39,18 +40,17 @@ public class Main {
             if (cli.hasOption("h")){
                 HelpFormatter hf = new HelpFormatter();
                 hf.printHelp("Options", options);
-                //System.out.println("这是jvmOnJava的帮助信息!");
             }
             if(cli.hasOption("v")){
-                System.out.println("jdk1.8");
+                log.info("jdk1.8");
             }
             if(cli.hasOption("jar")){
                 String []jarParameters = cli.getOptionValues("jar");
-                System.out.println(Arrays.asList(jarParameters));
+                log.info(String.valueOf(Arrays.asList(jarParameters)));
             }
 
-            // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ app.class
-            // -cp cmd/target/classes/com/wangzhen/jvm app.class
+            // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ App.class
+            // -cp classes/App app.class
             if(cli.hasOption("cp")){
                 String []cpParameters = cli.getOptionValues("cp");
                 DirEntry dirEntry = new DirEntry(cpParameters[0]);
@@ -71,6 +71,7 @@ public class Main {
 
     public static void startJvm(String [] cpParameters) throws NoSuchMethodException {
         ClassPath classPath = new ClassPath("",cpParameters[0]);
+        // 创建classLoader 加载基本属性类
         ZClassLoader classLoader = new ZClassLoader(classPath);
         ZClass zClass =  classLoader.loadClass(cpParameters[1]);
         ZMethod zMethod = zClass.getMainMethod();

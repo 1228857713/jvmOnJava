@@ -7,6 +7,9 @@ import com.wangzhen.jvm.runtimeData.Slots;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 模仿java的 classLoader
+ */
 public class ZClassLoader {
       ClassPath classPath;
       HashMap<String,ZClass> map;
@@ -175,7 +178,7 @@ public class ZClassLoader {
     }
 
     private void loadBasicClasses() {
-        //经过这一步load之后,classMap中就有Class的Class了，已经Object 和 Class 所实现的接口；
+        //经过这一步load之后,classMap中就有Class的Class了，以及Object 和 Class 所实现的接口；
         ZClass jlClassClass = loadClass("java/lang/Class");
         //接下来对classMap中的每一个Class都创建一个jClass;使用jlClassClass.NewObject()方法;
         // 通过调用 newObject 方法，为每一个 Class 都创建一个元类对象；这样在使用 String.class 时可以直接获取到；

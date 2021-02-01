@@ -1,4 +1,4 @@
-package com.wangzhen.jvm;
+package jvmTest;
 
 /**
  * Description: 异常处理相关测试类

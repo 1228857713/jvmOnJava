@@ -3,7 +3,7 @@ Classfile /Users/wangzhen/Desktop/workspace/java/jvm/jvmOnJava/jvmx/target/class
   Last modified 2020-10-4; size 777 bytes
   MD5 checksum 55282525d58adfb14b44f926cb55b218
   Compiled from "TestATHROW.java"
-public class com.wangzhen.jvm.TestATHROW
+public class jvmTest.TestATHROW
   minor version: 0
   major version: 52
   flags: ACC_PUBLIC, ACC_SUPER
@@ -45,7 +45,7 @@ Constant pool:
   #35 = Utf8               com/wangzhen/jvm/TestATHROW
   #36 = Utf8               java/lang/Object
 {
-  public com.wangzhen.jvm.TestATHROW();
+  public jvmTest.TestATHROW();
     descriptor: ()V
     flags: ACC_PUBLIC
     Code:

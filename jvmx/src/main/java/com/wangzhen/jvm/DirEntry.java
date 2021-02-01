@@ -2,8 +2,11 @@ package com.wangzhen.jvm;
 
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 
+@Slf4j
 public class DirEntry {
     public String absDir;
     public void printClass(){
@@ -14,7 +17,7 @@ public class DirEntry {
         File dir = new File(classPath);
         if(dir.exists()){
             absDir = dir.getAbsolutePath();
-            System.out.println("当前路径:"+absDir);
+            log.info("当前路径:{}",absDir);
         }else {
             throw new Exception("文件夹不存在");
         }

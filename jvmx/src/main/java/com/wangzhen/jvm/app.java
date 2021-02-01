@@ -1,6 +1,6 @@
-package App;
+package com.wangzhen.jvm;
 
-public class App  {
+public class app  {
     public static void main(String[] args) {
         int i = 0;
         int [] arr = {1,2};

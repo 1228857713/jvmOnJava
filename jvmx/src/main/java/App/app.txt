@@ -3,7 +3,7 @@ Classfile /D:/workspace/java/router-cloud/jvmx/target/classes/com/wangzhen/jvm/a
   Last modified 2020-9-25; size 774 bytes
   MD5 checksum 62f48322769dfddcb551075335e20bfe
   Compiled from "App.java"
-public class App.App
+public class com.wangzhen.jvm.App
   minor version: 0
   major version: 52
   flags: ACC_PUBLIC, ACC_SUPER
@@ -51,7 +51,7 @@ Constant pool:
   #41 = Utf8               java/io/PrintStream
   #42 = Utf8               println
 {
-  public App.App();
+  public com.wangzhen.jvm.App();
     descriptor: ()V
     flags: ACC_PUBLIC
     Code:
