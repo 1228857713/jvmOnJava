@@ -426,12 +426,17 @@ public class CopyOnWriteArrayList<E>
     }
 
     /**
-     * Appends the specified element to the end of this list.
+     *  1.add 方法会直接加锁，表明多个线程之间的写操作是互斥的，
+     *  2.但是其每次添加数据的时候会把 整个数据copy一份然后操作完成后在添加回原来的数组，所以 CopyOnWriteArrayList的读是不阻塞的。并且写入操作也不会阻塞读操作
+     *  3.CopyOnWriteArrayList 是典型的用空间换时间的思想，其如果操作大的数组的话，其copy一份数据消耗的空间代价是十分昂贵的。
+     *      所以主要用于读多写少的场景。比如黑名单，一次插入之后并不会频繁的修改数据了。否则启示建议使用Vector或者集合的同步方法
+     *
      *
      * @param e element to be appended to this list
      * @return {@code true} (as specified by {@link Collection#add})
      */
     public boolean add(E e) {
+        // 对象锁，每个 CopyOnWriteArrayList对象共享一个
         final ReentrantLock lock = this.lock;
         lock.lock();
         try {
@@ -990,7 +995,7 @@ public class CopyOnWriteArrayList<E>
 
         // Read in array length and allocate array
         int len = s.readInt();
-        SharedSecrets.getJavaOISAccess().checkArray(s, Object[].class, len);
+        //SharedSecrets.getJavaOISAccess().checkArray(s, Object[].class, len);
         Object[] elements = new Object[len];
 
         // Read in all elements in the proper order.

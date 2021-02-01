@@ -3,8 +3,8 @@ package com.wangzhen.concurrent.ThreadPool.threadPool;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.io.IOException;
+import java.util.concurrent.*;
 
 /**
  * Description: 线程池相关的测试类
@@ -15,9 +15,11 @@ import java.util.concurrent.Executors;
 public class ThreadPoolTest {
 
     @Test
-    public void test1(){
+    public void test1() throws IOException {
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1000, 10000, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100));
+        boolean b = threadPoolExecutor.prestartCoreThread();
+        System.in.read();
 
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        //new ThreadPoolExecutor();
+
     }
 }
