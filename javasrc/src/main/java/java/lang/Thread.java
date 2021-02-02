@@ -179,6 +179,7 @@ public class Thread implements Runnable {
 
     /**
      * 当创建子线程时，子线程可以得到父线程的 inheritableThreadLocals
+     * 这个变量主要用来父线程向子线程传递数据。
      */
     ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
 
@@ -322,8 +323,7 @@ public class Thread implements Runnable {
     }
 
     /**
-     * 初始化一个线程
-     *
+     * 初始化一个线程要做的事情，很重要
      * @param g 代表线程组，线程组可以对组内的线程进行批量的操作，比如批量的打断 interrupt
      * @param target run（）方法被调用的对象，也就是我们要运行的对象
      * @param name 新线程的名称
@@ -339,9 +339,7 @@ public class Thread implements Runnable {
         if (name == null) {
             throw new NullPointerException("name cannot be null");
         }
-
         this.name = name;
-
         // 当前线程作为父线程
         Thread parent = currentThread();
         // 如果安全管理器不为空，从安全管理器中拿线程组
@@ -377,7 +375,6 @@ public class Thread implements Runnable {
         }
 
         g.addUnstarted();
-
         this.group = g;
         // 子线程会继承父线程的守护属性
         this.daemon = parent.isDaemon();
@@ -398,7 +395,6 @@ public class Thread implements Runnable {
                 ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
         /* Stash the specified stack size in case the VM cares */
         this.stackSize = stackSize;
-
         // 线程 id 自增
         tid = nextThreadID();
     }

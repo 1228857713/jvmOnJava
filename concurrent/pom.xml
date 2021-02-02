@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Concurrent</artifactId>
+    <artifactId>concurrent</artifactId>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core -->

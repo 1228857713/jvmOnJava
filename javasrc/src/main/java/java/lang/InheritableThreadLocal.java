@@ -1,7 +1,9 @@
 package java.lang;
 
 /**
- * 创建允许子线程继承的 ThreadLocal
+ *  该类的实例在 Thread 类息息相关。
+ *  Thread thread = new Thread(()->{});
+ *  在创建线程的时候，查看 thread的 init() 方法其中会将父线程中所有的 InheritableThreadLocal 数据copy 到子线程中。用于父线程与子线程的数据传递。
  *
  * @see ThreadLocal
  */
