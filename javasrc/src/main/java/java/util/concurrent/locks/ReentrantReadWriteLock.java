@@ -470,6 +470,7 @@ public class ReentrantReadWriteLock
              */
             Thread current = Thread.currentThread();
             int c = getState();
+            // 查看写锁的数量，如果写锁的数量不等于0,那么直接加锁失败。
             if (exclusiveCount(c) != 0 &&
                 getExclusiveOwnerThread() != current)
                 return -1;

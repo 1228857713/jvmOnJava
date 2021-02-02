@@ -18,12 +18,17 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Slf4j
 public class TestReentrantReadWriteLock {
 
-    class ReadWirteArrayList extends ArrayList {
+    class ReadWirteArrayList<E> extends ArrayList<E> {
         private ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
         private ReentrantReadWriteLock.ReadLock readLock = reentrantReadWriteLock.readLock();
         private ReentrantReadWriteLock.WriteLock writeLock = reentrantReadWriteLock.writeLock();
+
+        public ReadWirteArrayList(int capicity) {
+            super(capicity);
+        }
+
         @Override
-        public Object get(int index) {
+        public E get(int index) {
             readLock.lock();
             try {
                 return super.get(index);
@@ -34,10 +39,10 @@ public class TestReentrantReadWriteLock {
         }
 
         @Override
-        public boolean add(Object o) {
+        public boolean add(E e) {
             writeLock.lock();
             try {
-                return super.add(o);
+                return super.add(e);
             }finally {
                 writeLock.unlock();
             }
@@ -49,7 +54,7 @@ public class TestReentrantReadWriteLock {
      */
     @Test
     public void  test01(){
-        ReadWirteArrayList list = new ReadWirteArrayList();
+       // ReadWirteArrayList list = new ReadWirteArrayList();
 
     }
 
@@ -62,9 +67,10 @@ public class TestReentrantReadWriteLock {
     @Test
     public void test02() throws InterruptedException {
         long start = System.currentTimeMillis();
-       List<Integer> integers = new Vector<>(100000);
-
+//       List<Integer> integers = new Vector<>(1000000);
 //        List<Integer> integers = new ArrayList<>(1000000);
+        List<Integer> integers = new ReadWirteArrayList<>(1000000);
+
         integers.add(0);
         Thread[] readThread = new Thread[1000];
         Thread[] writeThreads = new Thread[1000];
