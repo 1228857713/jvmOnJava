@@ -15,6 +15,7 @@ import sun.misc.Unsafe;
  *
  * @since 1.5
  * @author Doug Lea
+ * 核心就是通过 Unsafe native 方法来实现原子性操作
 */
 public class AtomicInteger extends Number implements java.io.Serializable {
     private static final long serialVersionUID = 6214790243416807050L;
