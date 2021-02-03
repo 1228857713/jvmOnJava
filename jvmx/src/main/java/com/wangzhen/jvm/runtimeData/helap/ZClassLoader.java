@@ -6,19 +6,20 @@ import com.wangzhen.jvm.runtimeData.Slots;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 模仿java的 classLoader
  */
 public class ZClassLoader {
-      ClassPath classPath;
-      HashMap<String,ZClass> map;
-
-
+    ClassPath classPath;
+    Map<String,ZClass> map;
     public ZClassLoader(ClassPath classPath) {
         this.classPath = classPath;
-        this.map = new HashMap<String, ZClass>();
+        this.map = new ConcurrentHashMap<String, ZClass>();
+        // 加载基本的类如Class.class Object.class
         loadBasicClasses();
+        // 加载8大基本类型，和void以及数组 基本类型
         loadPrimitiveClasses();
     }
 
@@ -36,10 +37,10 @@ public class ZClassLoader {
             // 加载普通类
             zClass = loadNonArrayClass(name);
         }
-        // 为每一个class 都关联一个元类
-        ZClass jlcClass = map.get("java/lang/Class");
-        if(jlcClass!=null){
-            zClass.jObject = jlcClass.newObject();
+        // 为每一个class都关联一个元类
+        ZClass javaLangClass = map.get("java/lang/Class");
+        if(javaLangClass!=null){
+            zClass.jObject = javaLangClass.newObject();
             zClass.jObject.extra = zClass;
         }
         return zClass;
@@ -89,6 +90,11 @@ public class ZClassLoader {
         // 准备
         prepare(zClass);
         // 解析
+        resolve();
+    }
+
+    private void  resolve(){
+
     }
 
     //在执行类的任何代码之前要对类进行严格的检验,这里忽略检验过程,作为空实现;
@@ -156,7 +162,9 @@ public class ZClassLoader {
 
     // 将class文件解析成 运行时class
     private ZClass parseClass(byte[] data) {
+        // 将读取到的class 文件解析成 一个 ClassFile对象
         ClassFile cf = new ClassFile(data);
+        // 将ClassFile对象 解析成运行时对象
         return new ZClass(cf);
     }
 
@@ -179,13 +187,13 @@ public class ZClassLoader {
 
     private void loadBasicClasses() {
         //经过这一步load之后,classMap中就有Class的Class了，以及Object 和 Class 所实现的接口；
-        ZClass jlClassClass = loadClass("java/lang/Class");
+        ZClass javaLangClass = loadClass("java/lang/Class");
         //接下来对classMap中的每一个Class都创建一个jClass;使用jlClassClass.NewObject()方法;
         // 通过调用 newObject 方法，为每一个 Class 都创建一个元类对象；这样在使用 String.class 时可以直接获取到；
         for (Map.Entry<String, ZClass> entry : map.entrySet()) {
             ZClass jClass = entry.getValue();
             if (jClass.jObject == null) {
-                jClass.jObject = jlClassClass.newObject();
+                jClass.jObject = javaLangClass.newObject();
                 jClass.jObject.extra = jClass;
             }
         }
@@ -216,12 +224,7 @@ public class ZClassLoader {
 
 
 
-            /**
-             * 利用 ClassPath 把 class 文件读进来
-             *
-             * @param name 类名，eg：java.lang.String 或者包含 main 方法的主类名
-             * @return class 字节数据
-             */
+
     private byte[] readClass(String name) {
         byte[] data = classPath.readClass(name);
         if (data != null) {

@@ -83,7 +83,6 @@ public class ClassFile {
 
     }
     public void readInterfaces(ClassReader classReader){
-
         // 读取 接口数量
         this.interfacesCount = classReader.readNByteToInt(2);
         interfaces = new int [interfacesCount] ;

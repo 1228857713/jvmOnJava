@@ -9,9 +9,6 @@ import java.io.*;
 @Slf4j
 public class DirEntry {
     public String absDir;
-    public void printClass(){
-        System.out.println(absDir);
-    }
 
     public  DirEntry(String classPath) throws Exception {
         File dir = new File(classPath);
@@ -24,26 +21,30 @@ public class DirEntry {
 
     }
 
-    public byte[] readClass(String className) throws IOException {
+    public byte[] readClass(String className) throws Exception {
         File file = new File(absDir, className);
         if (!file.exists()) {
-            return null;
+            throw new Exception("文件不存在");
         }
         byte[] temp = new byte[1024];
         BufferedInputStream in = null;
         ByteArrayOutputStream out = null;
-
-        in = new BufferedInputStream(new FileInputStream(file));
-        out = new ByteArrayOutputStream(1024);
-        int size = 0;
-        while ((size = in.read(temp)) != -1) {
-            out.write(temp, 0, size);
-        }
-        if (in != null) {
-            in.close();
-        }
-        if (out != null) {
-            out.close();
+        try {
+            in = new BufferedInputStream(new FileInputStream(file));
+            out = new ByteArrayOutputStream(1024);
+            int size = 0;
+            while ((size = in.read(temp)) != -1) {
+                out.write(temp, 0, size);
+            }
+        }catch (Exception e){
+            log.error("读取文件失败:{}",e);
+        }finally {
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
         }
         return out.toByteArray();
     }
@@ -59,10 +60,8 @@ public class DirEntry {
 
     }
 
-
     public  void printHexString( byte[] b)
     {
-
         for (int i = 0; i < b.length; i++)
         {
             String hex = Integer.toHexString(b[i] & 0xFF);

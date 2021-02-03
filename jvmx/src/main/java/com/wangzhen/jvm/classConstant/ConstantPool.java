@@ -15,6 +15,7 @@ public class ConstantPool {
         for (int i =1;i< constantPoolCount;i++){
             constantInfos[i] = createConstantInfo(classReader);
             realConstantPoolCount++;
+            // Long型 和Double 型占用两个 常量池大小
             if ((constantInfos[i] instanceof ConstantLongInfo) || (constantInfos[i] instanceof ConstantDoubleInfo)) {
                 i++;
             }
