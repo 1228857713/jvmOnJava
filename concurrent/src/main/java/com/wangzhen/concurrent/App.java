@@ -2,6 +2,8 @@ package com.wangzhen.concurrent;
 
 
 import org.junit.Test;
+import sun.net.ftp.impl.FtpClient;
+
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,6 +27,12 @@ public class App {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2000, 10000, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100));
         threadPoolExecutor.prestartAllCoreThreads();
         System.in.read();
+
+
+    }
+
+    @Test
+    public void test02(){
 
 
     }

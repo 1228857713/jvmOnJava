@@ -92,6 +92,8 @@ import java.util.function.Consumer;
  * @since 1.5
  * @author Doug Lea
  * @param <E> the type of elements held in this collection
+ * @desc CoypOnWriteArraySet 底层通过 CopyOnWriteArrayList 实现.核心就是其底层在 add 方法的时候判断该元素在数组中是否存在
+ *                          如果存在直接返回false 不在添加数据。如果不存在 就添加进去
  */
 public class CopyOnWriteArraySet<E> extends AbstractSet<E>
         implements java.io.Serializable {
