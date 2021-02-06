@@ -269,7 +269,7 @@ public class ReentrantReadWriteLock
         static final int EXCLUSIVE_MASK = (1 << SHARED_SHIFT) - 1;
 
         /** Returns the number of shared holds represented in count  */
-        //返回读锁的数量 将其无符号右移16位
+        //返回读锁的数量 将其无符号右移16位,将其高16位返回得到共享锁也就是读锁的数量。
         static int sharedCount(int c)    { return c >>> SHARED_SHIFT; }
         /** Returns the number of exclusive holds represented in count  */
         // 返回写锁的数量，c & ox0000FF
@@ -397,6 +397,7 @@ public class ReentrantReadWriteLock
              */
             Thread current = Thread.currentThread();
             int c = getState();
+            // 得到写锁的数量
             int w = exclusiveCount(c);
             if (c != 0) {
                 // (Note: if c != 0 and w == 0 then shared count != 0)
