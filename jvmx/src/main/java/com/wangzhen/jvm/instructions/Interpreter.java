@@ -5,10 +5,10 @@ import com.wangzhen.jvm.instructions.base.ByteCodeReader;
 import com.wangzhen.jvm.instructions.base.Instruction;
 import com.wangzhen.jvm.runtimeData.ZFrame;
 import com.wangzhen.jvm.runtimeData.ZThread;
+import lombok.extern.slf4j.Slf4j;
 
 
-
-
+@Slf4j
 public class Interpreter {
 
     public static void loop(ZThread thread) throws NoSuchMethodException {
@@ -35,7 +35,7 @@ public class Interpreter {
             Instruction instruction = InstructionFactory.createInstruction(opCode);
             instruction.fetchOperands(reader);
             frame.setNextPC(reader.getPc());
-            System.out.println("执行指令"+Integer.toHexString(opCode)+"："+instruction.toString()+"----栈桢为"+frame.toString());
+            log.info("执行指令"+Integer.toHexString(opCode)+"："+instruction.toString()+"----栈桢为"+frame.toString());
             instruction.execute(frame);
         }
     }

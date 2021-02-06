@@ -171,7 +171,8 @@ public class ZClassLoader {
     // 将class文件解析成 运行时class
     private ZClass parseClass(byte[] data) {
         ClassFile cf = new ClassFile(data);
-        return new ZClass(cf);
+        ZClass clz = new ZClass(cf);
+        return clz;
     }
 
     //加载当前类的父类,除非是Object类，否则需要递归调用LoadClass()方法加载它的超类
