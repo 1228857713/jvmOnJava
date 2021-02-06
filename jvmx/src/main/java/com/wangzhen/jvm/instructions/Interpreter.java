@@ -38,7 +38,5 @@ public class Interpreter {
             System.out.println("执行指令"+Integer.toHexString(opCode)+"："+instruction.toString()+"----栈桢为"+frame.toString());
             instruction.execute(frame);
         }
-
-
     }
 }

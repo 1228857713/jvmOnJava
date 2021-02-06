@@ -48,7 +48,6 @@ public class Main {
                 String []jarParameters = cli.getOptionValues("jar");
                 log.info(String.valueOf(Arrays.asList(jarParameters)));
             }
-
             // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ App.class
             // -cp classes/App app.class
             if(cli.hasOption("cp")){
