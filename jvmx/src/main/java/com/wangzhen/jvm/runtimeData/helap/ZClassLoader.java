@@ -94,7 +94,7 @@ public class ZClassLoader {
         verify(zClass);
         // 准备
         prepare(zClass);
-        // 解析
+
     }
 
     //在执行类的任何代码之前要对类进行严格的检验,这里忽略检验过程,作为空实现;

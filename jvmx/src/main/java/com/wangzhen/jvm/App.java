@@ -1,24 +1,18 @@
 package com.wangzhen.jvm;
 
 public class App {
-    Test test;
-    static int a;
+    final static int [] a =new int [10];
+    final static String s ="hello world";
+    final static Test test1= new Test();
+    Test test2 =new Test();
 
     public static void main(String[] args) {
-        App app = new App();
-        app.test = new Test();
-        app.test.sayName();
-        app.say();
-    }
-
-    public static void  say(){
 
     }
+
 }
 class Test{
-    public void sayName(){
-        System.out.println("hello world");
-    }
+
 
 
 }
