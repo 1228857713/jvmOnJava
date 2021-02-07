@@ -16,7 +16,7 @@ import java.util.Arrays;
 /**
  *  使用说明：
  *  1.启动参数
- * -cp jvmx/target/classes/  com.wangzhen.jvm.App
+ * -cp jvmx/target/classes/  com.wangzhen.jvm.com.wangzhen.jvm.App
  */
 @Slf4j
 public class Main {
@@ -48,8 +48,8 @@ public class Main {
                 String []jarParameters = cli.getOptionValues("jar");
                 log.info(String.valueOf(Arrays.asList(jarParameters)));
             }
-            // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ App.class
-            // -cp classes/App App.class
+            // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ com.wangzhen.jvm.App.class
+            // -cp classes/com.wangzhen.jvm.App com.wangzhen.jvm.App.class
             if(cli.hasOption("cp")){
                 String []cpParameters = cli.getOptionValues("cp");
                 DirEntry dirEntry = new DirEntry(cpParameters[0]);
