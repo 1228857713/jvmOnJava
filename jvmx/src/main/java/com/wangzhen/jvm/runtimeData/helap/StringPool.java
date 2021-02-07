@@ -3,16 +3,17 @@ package com.wangzhen.jvm.runtimeData.helap;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author zachaxy
  * @date 17/12/30
  * desc:这里用来模拟 JVM 中的字符串池，但是由于当前的 JVM 本身就是用 Java 写的，所以会省掉很多真正的细节
- * 这里用一个 HasMap 来模拟字符串池，key 为从 class 文件中读到的字符串，value 为我们定义的 Zobject
+ * 这里用一个 ConcurrentHasMap 来模拟字符串池，key 为从 class 文件中读到的字符串，value 为我们定义的 Zobject
  */
 public class StringPool {
-    public static Map<String,ZObject> internedString = new HashMap<>();
-    public static Map<ZObject,String> realInternedString = new HashMap<>();
+    public static Map<String,ZObject> internedString = new ConcurrentHashMap<>();
+    public static Map<ZObject,String> realInternedString = new ConcurrentHashMap<>();
 
     public static ZObject jString(ZClassLoader classLoader,String str){
         if(internedString.containsKey(str)){

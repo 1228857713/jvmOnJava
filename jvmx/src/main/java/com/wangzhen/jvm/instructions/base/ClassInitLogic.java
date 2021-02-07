@@ -5,6 +5,16 @@ import com.wangzhen.jvm.runtimeData.ZThread;
 import com.wangzhen.jvm.runtimeData.helap.ZClass;
 import com.wangzhen.jvm.runtimeData.helap.ZMethod;
 
+
+/**
+ *
+ * @desc: 类的初始化操作：
+ * 1.注意是类的初始化操作不是对象的初始化操作。找到类中的<clinit>方法执行。
+ * 2.<clinit>方法由编译器自动收集类中所有静态变量的赋值语句和静态代码块的语句，按照其在源文件中出现的顺序融到<clinit>中。
+ * 同时，虚拟机会保证在执行子类的<clinit>方法之前，父类的<clinit>方法已经执行完毕。所以虚拟机中第一个被执行的<clinit>方法一定是Object类的。
+ * 3.只有当类中存在静态变量赋值语句或者静态代码块时，才会产生<clinit>方法，如果没有这些，那么虚拟机也就没有必要去创建<clinit>方法。
+ * 4.只有在遇到 new，getstatic，putstatic，invokestatic 等指令的时候我们才会去做初始化操作。
+ */
 public class ClassInitLogic {
     public static void initClass(ZClass zClass,ZThread thread){
         zClass.startInit();

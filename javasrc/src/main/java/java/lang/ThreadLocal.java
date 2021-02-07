@@ -43,7 +43,8 @@ public class ThreadLocal<T> {
             new AtomicInteger();
 
     /**
-     * HASH_INCREMENT 是一个特殊哈希魔数，这主要与斐波那契散列法以及黄金分割有关
+     * HASH_INCREMENT 是一个特殊哈希魔数，这主要与斐波那契散列法以及黄金分割有关，通过每次增加该数值的增加
+     * 可以形成完美的散列。具体可以查看这篇文章 https://www.cnblogs.com/throwable/p/12306996.html
      */
     private static final int HASH_INCREMENT = 0x61c88647;
 

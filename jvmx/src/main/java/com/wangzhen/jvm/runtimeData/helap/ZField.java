@@ -5,7 +5,14 @@ import com.wangzhen.jvm.classfile.classPackage.MemberInfo;
 
 public class ZField extends ClassMember{
 
-    //运行时常量池中的索引,该属性只有在static final成员有初值的情况下才有;
+    /**
+     * 1.运行时常量池中的索引,该属性只有在static final成员有初值的情况下才有;说明被 static final 修饰的变量
+     *   在类的准备阶段就会为其赋值 {@link com.wangzhen.jvm.runtimeData.helap.ZClassLoader#allocAndInitStaticVars }
+     * 2.根据测试，只有在 static final 修饰的是基本变量或者String的时候的时候constValueIndex在才有值，而如果是引用对象的时候
+     *   constValueIndex 是空，其变量的赋值操作会推迟到类的初始化操作中(<clinit>)，和普通的静态变量是一样的。所以 initStaticFinalVar 方法
+     *   {@link com.wangzhen.jvm.runtimeData.helap.ZClassLoader#initStaticFinalVar }
+     *   的实现并没对象和数组也就是 'L' '[' 的。
+     */
     int constValueIndex;
     /**
      * 类中字段数组slots中的的索引；其赋值在首次加载 class 文件后，为其分配的 slotId
