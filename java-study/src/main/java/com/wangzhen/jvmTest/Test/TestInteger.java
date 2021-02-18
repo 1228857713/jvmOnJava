@@ -3,6 +3,8 @@ package com.wangzhen.jvmTest.Test;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.io.IOException;
+
 /**
  * Description: Integer一些相关的测试类
  * Datetime:    2021/1/29   9:49
@@ -35,4 +37,27 @@ public class TestInteger {
         //false
         System.out.println(integer3==integer4);
     }
+
+
+    /**
+     * 测试 Integer 对象占用的内存的大小：
+     *      1.在开启指针压缩的情况下(默认开启) 为 16个字节，MarkWorlds8+classpoint4+int4
+     *      2.在未开启指针压缩的情况下（-XX:-UseCompressedOops） 为24字节 MarkWorlds8+classpoint8+int4+4（对象填充）
+     * @throws IOException
+     */
+    @Test
+    public void test02() throws IOException {
+        Integer _1000 = 1000;
+        int i = 10;
+        Long l = 10000000l;
+        System.in.read();
+    }
+
+    // 浮点类型计算 并不准确，需要使用 java中math函数，BigDecimal 来计算。
+    @Test
+    public void test03(){
+        float f2 = 0.45f/3;
+        System.out.println(f2);
+    }
+
 }
