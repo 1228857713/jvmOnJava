@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 
 /**
  * Description: 源码编译步骤:
- *                         1. javac App.java  --> 生成class 文件
- *                         2. java App  -->执行 App.class 注意不要带 .class 后缀
+ *                         1. javac com.wangzhen.jvm.App.java  --> 生成class 文件
+ *                         2. java com.wangzhen.jvm.App  -->执行 com.wangzhen.jvm.App.class 注意不要带 .class 后缀
  * Datetime:    2020/9/29   16:48
  * Author:   王震
  */
