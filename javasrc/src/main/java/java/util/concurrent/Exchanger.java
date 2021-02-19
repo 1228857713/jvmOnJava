@@ -102,6 +102,12 @@ import java.util.concurrent.locks.LockSupport;
  * @author Doug Lea and Bill Scherer and Michael Scott
  * @param <V> The type of objects that may be exchanged
  */
+
+/**
+ *
+ * desc  Exchanger 用于两个线程之间交换数据
+ * demo 见 {@link com.wangzhen.concurrent.juc.aqs.TestExchanger}
+ */
 public class Exchanger<V> {
 
     /*

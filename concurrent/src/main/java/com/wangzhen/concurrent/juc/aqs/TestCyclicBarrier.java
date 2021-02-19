@@ -34,6 +34,7 @@ public class TestCyclicBarrier {
                     SleepUtils.second(new Random().nextInt(5));
                     log.info("{}到会了", finalI);
                     cyclicBarrier.await();
+                    log.info("收到，开会了");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

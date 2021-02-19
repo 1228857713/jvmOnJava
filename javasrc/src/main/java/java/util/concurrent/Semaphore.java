@@ -153,6 +153,12 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
  * @since 1.5
  * @author Doug Lea
  */
+
+/**
+ * 信号量
+ *    维护一个信号量，保证最多只有几个线程可以同时执行，如型号量初始化为3 那么5个线程同时最多只有3个线程可以支持
+ *    {@link com.wangzhen.concurrent.juc.aqs.TestSemaphore}
+ */
 public class Semaphore implements java.io.Serializable {
     private static final long serialVersionUID = -3222578661600680210L;
     /** All mechanics via AbstractQueuedSynchronizer subclass */

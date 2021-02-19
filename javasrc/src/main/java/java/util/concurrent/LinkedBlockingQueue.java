@@ -420,6 +420,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
             if (count.get() < capacity) {
                 enqueue(node);
                 c = count.getAndIncrement();
+                // 如果增加后的 数量依然小于容量，唤醒等待线程
                 if (c + 1 < capacity)
                     notFull.signal();
             }
