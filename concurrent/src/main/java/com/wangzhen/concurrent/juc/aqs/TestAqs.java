@@ -1,41 +1,49 @@
 package com.wangzhen.concurrent.juc.aqs;
 
 import com.wangzhen.concurrent.util.SleepUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+@Slf4j
 public class TestAqs {
-    static Logger logger = LoggerFactory.getLogger(TestAqs.class);
+
 
     public static void main(String[] args) {
         MyLock lock = new MyLock();
         new Thread(()->{
             lock.lock();
             try {
-                logger.debug("线程1加锁成功");
+                log.info("线程1加锁成功");
                 SleepUtils.second(1);
             }finally {
                 lock.unlock();
-                logger.debug("线程1释放锁成功");
+                log.info("线程1释放锁成功");
             }
         },"t1").start();
 
         new Thread(()->{
             lock.lock();
             try {
-                logger.debug("线程2加锁成功");
+                log.info("线程2加锁成功");
             }finally {
                 lock.unlock();
-                logger.debug("线程2释放锁成功");
+                log.info("线程2释放锁成功");
             }
         },"t2").start();
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
