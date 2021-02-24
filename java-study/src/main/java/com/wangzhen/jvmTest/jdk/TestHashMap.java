@@ -1,4 +1,4 @@
-package com.wangzhen.jvmTest.Test.jdk;
+package com.wangzhen.jvmTest.jdk;
 
 import com.wangzhen.jvmTest.util.SleepUtils;
 import lombok.extern.slf4j.Slf4j;
