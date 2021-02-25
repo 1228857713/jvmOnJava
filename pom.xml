@@ -15,7 +15,6 @@
     <modules>
         <module>jvmx</module>
         <module>java-study</module>
-        <module>concurrent</module>
         <module>algorithm</module>
         <module>netty</module>
         <module>javasrc</module>

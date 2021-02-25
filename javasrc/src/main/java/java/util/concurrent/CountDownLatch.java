@@ -157,7 +157,7 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 /**
  *  CountDownLatch 倒计时锁
  *   初始化CountDownLatch 数量后，每个线程完成任务后将计数器减一，等置为0后就可以执行 await的线程了
- *   {@link com.wangzhen.concurrent.juc.aqs.TestCountDownLatch}
+ *   {@link com.wangzhen.javastudy.juc.aqs.TestCountDownLatch}
  */
 public class CountDownLatch {
     /**

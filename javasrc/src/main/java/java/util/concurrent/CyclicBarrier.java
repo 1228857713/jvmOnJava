@@ -141,7 +141,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *  CyclicBarrier：循环屏障
  *      让多个线程达到屏障时被阻塞，直到最后一个线程达到，才开始执行任务。
  *      现实生活中如5个人开会 ，等第五个人 达到的时候会议才会开始，所有的开会线程才会继续开始工作
- *      demo见 {@link com.wangzhen.concurrent.juc.aqs.TestCyclicBarrier}
+ *      demo见 {@link com.wangzhen.javastudy.juc.aqs.TestCyclicBarrier}
  */
 public class CyclicBarrier {
     /**
