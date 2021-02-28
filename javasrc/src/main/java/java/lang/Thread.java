@@ -268,7 +268,7 @@ public class Thread implements Runnable {
     /**
      * 当前线程做出让步，放弃当前 cpu，让线程重新选择 cpu，避免线程过度使用 cpu
      * 让步不是不执行，也有可能重新选中自己
-     * 当前线程让出 cpu 时间片，重新抢占执行权
+     * 当前线程让出cpu时间片，重新抢占执行权
      */
     public static native void yield();
 
