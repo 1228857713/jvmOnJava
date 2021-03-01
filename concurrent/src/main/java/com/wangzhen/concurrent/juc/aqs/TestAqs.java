@@ -15,8 +15,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 @Slf4j
 public class TestAqs {
-
-
     public static void main(String[] args) {
         MyLock lock = new MyLock();
         new Thread(()->{
