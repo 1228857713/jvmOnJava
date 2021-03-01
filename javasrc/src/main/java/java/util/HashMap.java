@@ -37,6 +37,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * 默认的初始容量（容量为HashMap中槽的数目）是16，且实际容量必须是2的整数次幂。
+     * 并非数组的长度而是整个hashmap的容量
      */
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
 
@@ -46,22 +47,30 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
-     * 默认装填因子0.75，如果当前键值对个数 >= HashMap最大容量*装填因子，进行rehash操作
+     *1. 默认装填因子0.75，如果当前键值对个数 >= HashMap当前容量*装填因子，进行rehash操作
+     *
+     * 2.loadFactor加载因子是控制数组存放数据的疏密程度，loadFactor越趋近于1，那么 数组中存放的数据(entry)也就越多，也就越密，也就是会让链表的长度增加，
+     * 3.loadFactor越小，也就是趋近于0，数组中存放的数据(entry)也就越少，也就越稀疏。
+     * 4.loadFactor太大导致查找元素效率低，太小导致数组的利用率低，存放的数据会很分散。loadFactor的默认值为0.75f是官方给出的一个比较好的临界值。
+     * 5.给定的默认容量为 16，负载因子为 0.75。Map 在使用过程中不断的往里面存放数据，当数量达到了 16 * 0.75 = 12 就需要将当前 16 的容量进行扩容，而扩容这个过程涉及到 rehash、复制数据等操作，所以非常消耗性能。
+     * 6.所以java 开发手册中规范了，hashmap的使用应该制定其初始化的大小 比如如果你估算了map中大概要存放 15个key那么其默认大小应该设置为 20.防止hashmao 扩容影响性能。
+     *
      */
     static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
     /**
-     * JDK1.8 新加，Entry链表最大长度，当桶中节点数目大于该长度时，将链表转成红黑树存储；
+     * JDK1.8 新加，Entry链表最大长度，当链表节点数目大于该长度时，将链表转成红黑树存储；
      */
     static final int TREEIFY_THRESHOLD = 8;
 
     /**
-     * JDK1.8 新加，当桶中节点数小于该长度，将红黑树转为链表存储；
+     * JDK1.8 新加，当链表节点数小于该长度，将红黑树转为链表存储；
      */
     static final int UNTREEIFY_THRESHOLD = 6;
 
     /**
-     * 桶可能被转化为树形结构的最小容量。当哈希表的大小超过这个阈值，才会把链式结构转化成树型结构，否则仅采取扩容来尝试减少冲突。
+     * 最小树化的容量
+     * 链表可能被转化为树形结构的最小容量。当哈希表（也就是数组）的大小超过这个阈值，才会把链式结构转化成树型结构，否则仅采取扩容来尝试减少冲突。
      * 应该至少4*TREEIFY_THRESHOLD来避免扩容和树形结构化之间的冲突。
      */
     static final int MIN_TREEIFY_CAPACITY = 64;
@@ -209,7 +218,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * HashMap的扩容阈值，在HashMap中存储的Node键值对超过这个数量时，自动扩容容量为原来的二倍
-     *
+     * threshold = capacity * loadFactor*，当Size>=threshold的时候，那么就要考虑对数组的扩增了，也就是说，这个的意思就是 衡量数组是否需要扩增的一个标准
      * @serial
      */
     int threshold;
@@ -414,16 +423,16 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     /**
      * Map.put和其他相关方法的实现需要的方法
      * putVal方法可以分为下面的几个步骤:
-     * 1.如果哈希表为空，调用resize()创建一个哈希表。
+     * 1.如果哈希表为空，调用resize()创建一个哈希表(也就是一个node数组)。
      * 2.如果指定参数hash在表中没有对应的桶，即为没有碰撞，直接将键值对插入到哈希表中即可。
      * 3.如果有碰撞，遍历桶，找到key映射的节点
-     * 3.1桶中的第一个节点就匹配了，将桶中的第一个节点记录起来。
-     * 3.2如果桶中的第一个节点没有匹配，且桶中结构为红黑树，则调用红黑树对应的方法插入键值对。
-     * 3.3如果不是红黑树，那么就肯定是链表。遍历链表，如果找到了key映射的节点，就记录这个节点，退出循环。如果没有找到，在链表尾部插入节点。插入后，如果链的长度大于等于TREEIFY_THRESHOLD这个临界值，则使用treeifyBin方法把链表转为红黑树。
+     *   3.1桶中的第一个节点就匹配了，将桶中的第一个节点记录起来。
+     *   3.2如果桶中的第一个节点没有匹配，且桶中结构为红黑树，则调用红黑树对应的方法插入键值对。
+     *   3.3如果不是红黑树，那么就肯定是链表。遍历链表，如果找到了key映射的节点，就记录这个节点，退出循环。如果没有找到，在链表尾部插入节点。插入后，如果链的长度大于等于TREEIFY_THRESHOLD这个临界值，则使用treeifyBin方法把链表转为红黑树。
      * 4.如果找到了key映射的节点，且节点不为null
-     * 4.1记录节点的vlaue。
-     * 4.2如果参数onlyIfAbsent为false，或者oldValue为null，替换value，否则不替换。
-     * 4.3返回记录下来的节点的value。
+     *  4.1记录节点的value。
+     *  4.2如果参数onlyIfAbsent为false，或者oldValue为null，替换value，否则不替换。
+     *  4.3返回记录下来的节点的value。
      * 5.如果没有找到key映射的节点（2、3步中讲了，这种情况会插入到hashMap中），插入节点后size会加1，这时要检查size是否大于临界值threshold，如果大于会使用resize方法进行扩容。
      *
      * @param hash         指定参数key的哈希值
@@ -505,9 +514,10 @@ public class HashMap<K, V> extends AbstractMap<K, V>
     }
 
     /**
-     * 对table进行初始化或者扩容。
+     * @description 对table进行初始化或者扩容。
      * 如果table为null，则对table进行初始化
      * 如果对table扩容，因为每次扩容都是翻倍，与原来计算（n-1）&hash的结果相比，节点要么就在原来的位置，要么就被分配到“原位置+旧容量”这个位置
+     * 例如：16—->32 那么 hashcode是8的在原来的位置，hashcode 是17的从1这个位置跑到了17 17=16+1；
      * resize的步骤总结为:
      * 1.计算扩容后的容量，临界值。
      * 2.将hashMap的临界值修改为扩容后的临界值
@@ -583,7 +593,7 @@ public class HashMap<K, V> extends AbstractMap<K, V>
                         //遍历整个链表中的节点
                         do {
                             next = e.next;
-                            // 原索引
+                            // 原索引 todo:为什么这个等于0就是 放在原来索引的位置。在我理解应该是取索引后大于 oldcap 才是放到新位置
                             if ((e.hash & oldCap) == 0) {
                                 if (loTail == null)
                                     loHead = e;

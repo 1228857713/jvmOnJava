@@ -548,7 +548,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
             int n, i, fh;
             //检查是否初始化了，如果没有，则初始化
             if (tab == null || (n = tab.length) == 0)
-                // 初始化 table
+                // 初始化table,这里面也比较复杂
                 tab = initTable();
             /**
              * i=(n-1)&hash 等价于i=hash%n(前提是n为2的幂次方).即取出table中位置的节点用f表示。 有如下两种情况：
@@ -561,6 +561,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
                     break;                   // no lock when adding to empty bin
                 }
             } else if ((fh = f.hash) == MOVED)//检查table[i]的节点的hash是否等于MOVED，如果等于，则检测到正在扩容，则帮助其扩容
+                // todo:帮组其扩容可太秀了
                 tab = helpTransfer(tab, f);
             else {//table[i]的节点的hash值不等于MOVED。
                 V oldVal = null;
@@ -1766,6 +1767,12 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
     /**
      * Initializes table, using the size recorded in sizeCtl.
      * 初始化 map 的数组，这里可能出现很多并发问题，比如多个线程同时初始化数组
+     * sizeCtl 说明：
+     *  1.-1 说明正在初始化
+     *  2.-N 说明有N-1个线程正在进行扩容
+     *  3.表示 table 初始化大小，如果 table 没有初始化
+     *  4.表示 table 容量，如果 table　已经初始化。
+     *
      */
     private final Node<K, V>[] initTable() {
         Node<K, V>[] tab;
@@ -1776,6 +1783,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
                 // 让出cpu 时间片,等再次获取cpu 时间片的时候 table 应该已经被初始化好了，这时候应该退出while 循环了
                 Thread.yield(); // lost initialization race; just spin
             else if (U.compareAndSwapInt(this, SIZECTL, sc, -1)) {
+                // 通过cas操作将其修改为-1，如果成功那么由该线程负责初始化hash表
                 // 参考 SIZECTL 标识的说明，-1 代表 hash表正在初始化。
                 // 如果CAS操作成功了，代表本线程将负责初始化工作
                 try {

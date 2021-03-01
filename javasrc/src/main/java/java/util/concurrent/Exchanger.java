@@ -35,9 +35,6 @@
  */
 
 package java.util.concurrent;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.locks.LockSupport;
 
 /**
  * A synchronization point at which threads can pair and swap elements
@@ -106,7 +103,7 @@ import java.util.concurrent.locks.LockSupport;
 /**
  *
  * desc  Exchanger 用于两个线程之间交换数据
- * demo 见 {@link com.wangzhen.concurrent.juc.aqs.TestExchanger}
+ * demo 见 {@link com.wangzhen.javastudy.juc.aqs.TestExchanger}
  */
 public class Exchanger<V> {
 
