@@ -13,7 +13,7 @@ import org.junit.Test;
 @Slf4j
 public class TestVolatile {
     //volatile
-    boolean flag = false;
+    boolean flag = true;
 
     /**
      * @description
@@ -28,7 +28,6 @@ public class TestVolatile {
         Thread studyThread = new Thread(() -> {
             while (true){
                 if(flag){
-
                     log.info("好好学习天天向上");
                 }
             }
@@ -56,7 +55,7 @@ public class TestVolatile {
                 SleepUtils.second(1);
                 if(flag){
                     log.info("好好学习天天向上");
-                }else{
+               } else{
                     // 增加下面的 else 代码都会影响 test01的结构
                     // 因为这些代码里面有锁机制
                     log.info("我要打游戏");
@@ -67,7 +66,7 @@ public class TestVolatile {
 
         Thread gameThread = new Thread(() -> {
             SleepUtils.second(1);
-            flag = true;
+            flag = false;
         });
         studyThread.start();
         gameThread.start();
