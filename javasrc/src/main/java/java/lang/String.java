@@ -94,7 +94,7 @@ public final class String implements java.io.Serializable, Comparable<String>, C
      *
      */
     /**
-     * String底层是使用字符数组存储的
+     * String底层是使用字符数组存储的,jdk1.9 以后修改用 byte[]数组存放，其主要目的还是用来节约空间，中文等用两个byte存放
      */
     private final char value[];
 

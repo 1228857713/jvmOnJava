@@ -103,7 +103,7 @@ public class ZClassLoader {
 
     //给类变量分配空间并赋予初始值
     private void prepare(ZClass clazz) {
-        // 计算实例化字段需要的slot值
+        // 计算实例化字段需要的slot值，这里只是计算大小，并不是赋予初值，赋值操作是在对象的实例化操作中赋值的
         calcInstanceFieldSlotIds(clazz);
         // 计算静态变量需要的slot的值
         calcStaticFieldSlotIds(clazz);
@@ -149,7 +149,7 @@ public class ZClassLoader {
     // 为静态变量申请空间,注意:这个申请空间的过程,就是将所有的静态变量赋值为0或者null;
     // 如果是 static final 的基本类型或者 String，其值会保存在ConstantValueAttribute属性中
     private void allocAndInitStaticVars(ZClass clazz) {
-        // new 出对象对java程序来说会默认赋值
+        // new出对象对java程序来说会默认赋值
         clazz.staticVars = new Slots(clazz.staticSlotCount);
         for (ZField field : clazz.fileds) {
             // 如果是 static final 类型 那么就直接赋值
