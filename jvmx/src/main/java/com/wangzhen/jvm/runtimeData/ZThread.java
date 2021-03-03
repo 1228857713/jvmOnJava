@@ -5,7 +5,7 @@ import com.wangzhen.jvm.runtimeData.helap.ZMethod;
 /**
  *
  * 自定义线程：
- *      线程私有的区域包含：1.程序计数器，
+ *      线程私有的区域包含：  1.程序计数器，
  *                         2.java 虚拟机栈
  *                         3.本地方法栈
  */
