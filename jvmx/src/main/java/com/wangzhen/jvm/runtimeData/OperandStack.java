@@ -5,6 +5,12 @@ import com.wangzhen.jvm.runtimeData.helap.ZObject;
 
 import java.util.Arrays;
 
+/**
+ * @author: wangzhen
+ * @Date: 2021/3/3 9:47
+ * @Desc: 新添加的方法,根据参数n,返回操作数栈中的倒数第n个引用
+ * {@link OperandStack}
+*/
 public class OperandStack {
     Slot [] slots;
     int size;
@@ -114,7 +120,12 @@ public class OperandStack {
         return slots[size];
     }
 
-    //新添加的方法,根据参数n,返回操作数栈中的倒数第n个引用;
+    /**
+     * @author: wangzhen
+     * @Date: 2021/3/3 9:47
+     * @Desc: 新添加的方法,根据参数n,返回操作数栈中的倒数第n个引用;
+     * {@link OperandStack}
+    */
     public ZObject getRefFromTop(int n) {
         return slots[size - 1 - n].ref;
     }
@@ -124,14 +135,19 @@ public class OperandStack {
         return slots[index].ref;
     }
 
-    // 清空操作数栈
+    /**
+     * @author: wangzhen
+     * @Date: 2021/3/3 9:46
+     * @Desc:
+     * {@link OperandStack}
+    */
     public void clear(){
         size=0;
     }
 
 
         public static void main(String[] args) {
-        long n= 222222l;
+        long n= 222222L;
         int low=(int)n;
         int high=(int)n>>1;
 
