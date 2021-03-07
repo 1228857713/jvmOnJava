@@ -131,7 +131,7 @@ public class OperandStack {
 
 
         public static void main(String[] args) {
-        long n= 222222l;
+        long n= 222222L;
         int low=(int)n;
         int high=(int)n>>1;
 

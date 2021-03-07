@@ -825,7 +825,7 @@ public class ArrayList<E> extends AbstractList<E>
             checkForComodification();
         }
 
-        //检查数组是否被修改
+        //检查数组是否被修改，如果在遍历的时候被修改了就会抛出 ConcurrentModificationException()
         final void checkForComodification() {
             if (modCount != expectedModCount)
                 throw new ConcurrentModificationException();
