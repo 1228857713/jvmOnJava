@@ -8,6 +8,10 @@ import com.wangzhen.jvm.runtimeData.helap.RuntimeConstantPool;
 import com.wangzhen.jvm.runtimeData.helap.ZClass;
 import com.wangzhen.jvm.runtimeData.helap.ZObject;
 
+/**
+ *  NEW 指令这里其实主要就是创建一个对象为对象的实例变量分配空间
+ *  后续指令会调用类的构造方法为实例变量赋予对应的值
+ */
 public class NEW extends Index16Instruction {
 
     @Override

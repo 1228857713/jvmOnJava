@@ -40,12 +40,15 @@ public class ByteUtils {
      * @return
      */
     public static int bytesToInt(byte[] bytes)  {
-        if(bytes.length == 1)
+        if(bytes.length == 1) {
             return Byte.toUnsignedInt(bytes[0]);
-        if(bytes.length ==2)
+        }
+        if(bytes.length ==2) {
             return bytesToU16(bytes);
-        if (bytes.length ==4 )
+        }
+        if (bytes.length ==4 ) {
             return byteToInt32(bytes);
+        }
         return -1;
     }
 

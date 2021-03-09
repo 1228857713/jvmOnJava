@@ -346,7 +346,9 @@ public class ZClass {
     // 查找类中的方法
     private ZMethod getStaticMethod(String name, String descriptor, boolean isStatic) {
         for (ZClass c = this; c != null; c = c.superClass) {
-            if (null == c.methods) continue;
+            if (null == c.methods) {
+                continue;
+            }
             for (ZMethod method : c.methods) {
                 if (method.isStatic() == isStatic && method.name.equals(name) && method.descriptor.equals(descriptor)) {
                     return method;

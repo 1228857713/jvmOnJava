@@ -307,7 +307,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
     transient volatile Node<K, V>[] table;
 
     /**
-     * 扩容时用于存放数据的变量，扩容完成后会置为null。
+     * 扩容时用于存放数据的变量，扩容完成后会置为null。每次扩容为原来的2倍
      */
     private transient volatile Node<K, V>[] nextTable;
 
@@ -2247,6 +2247,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
 
     /**
      * Nodes for use in TreeBins
+     * 在红黑树结构中存储实际的数据
      */
     static final class TreeNode<K, V> extends Node<K, V> {
         TreeNode<K, V> parent;  // red-black tree links
@@ -2310,6 +2311,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
      * forcing writers (who hold bin lock) to wait for readers (who do
      * not) to complete before tree restructuring operations.
      */
+    // 他并不存储实际的数据，而是维护桶内红黑树的读写锁，存储对红黑树节点的引用
     static final class TreeBin<K, V> extends Node<K, V> {
         TreeNode<K, V> root;
         volatile TreeNode<K, V> first;
