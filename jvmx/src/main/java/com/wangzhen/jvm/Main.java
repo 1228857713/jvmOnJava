@@ -16,7 +16,7 @@ import java.util.Arrays;
 /**
  *  使用说明：
  *  1.启动参数
- * -cp jvmx/target/classes/  com.wangzhen.jvm.com.wangzhen.jvm.App
+ * -cp jvmx/target/classes/  com.wangzhen.jvm.classfile.App
  */
 @Slf4j
 public class Main {
@@ -48,8 +48,8 @@ public class Main {
                 String []jarParameters = cli.getOptionValues("jar");
                 log.info(String.valueOf(Arrays.asList(jarParameters)));
             }
-            // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ com.wangzhen.jvm.App.class
-            // -cp classes/com.wangzhen.jvm.App com.wangzhen.jvm.App.class
+            // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ com.wangzhen.jvm.classfile.App.class
+            // -cp classes/com.wangzhen.jvm.classfile.App com.wangzhen.jvm.classfile.App.class
             if(cli.hasOption("cp")){
                 String []cpParameters = cli.getOptionValues("cp");
                 DirEntry dirEntry = new DirEntry(cpParameters[0]);
@@ -74,6 +74,9 @@ public class Main {
         ZClassLoader classLoader = new ZClassLoader(classPath);
         // 这里打断点，可以看到直接想要的类的加载过程
         ZClass zClass =  classLoader.loadClass(cpParameters[1]);
+
+
+
         ZMethod zMethod = zClass.getMainMethod();
         ZThread thread = new ZThread();
         ZFrame frame = new ZFrame(thread,zMethod);
