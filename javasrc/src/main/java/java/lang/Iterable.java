@@ -42,11 +42,33 @@ import java.util.function.Consumer;
  * @since 1.5
  * @jls 14.14.2 The enhanced for statement
  */
+/*
+ * Iterable 可迭代的：实现类该接口表明了该类是可迭代的一个类
+ * Iterator 迭代器：用于定义一个迭代类的接口
+ *
+ *
+ * 内部迭代器，常用作容器类的接口，以支持遍历操作（同时支持流式遍历）
+ * 内部迭代器的特点是嵌入式
+ * 其迭代行为必须在容器对象内部实现（借助了外部比较器）
+ *
+ * 一个类如果实现了Iterable接口，就意味着“该类本身支持遍历”，并可以通过for-each这种循环语法来直接遍历
+ * 当然，一个类如果没有实现Iterable接口，也可以通过挂载外部迭代器Iterator进行遍历
+ *
+ * 此外，内部迭代器还
+ *
+ * 注1：区别于外部迭代器Iterator
+ * 注2：区别于枚举器Enumeration
+ * 注3：区别于流迭代器Spliterator
+ */
 public interface Iterable<T> {
     /**
      * Returns an iterator over elements of type {@code T}.
      *
      * @return an Iterator.
+     */
+    /**
+     *
+     * @return 返回一个迭代器
      */
     Iterator<T> iterator();
 

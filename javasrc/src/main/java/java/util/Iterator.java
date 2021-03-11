@@ -58,6 +58,7 @@ public interface Iterator<E> {
      * return an element rather than throwing an exception.)
      *
      * @return {@code true} if the iteration has more elements
+     * 是否有下一个元素
      */
     boolean hasNext();
 
@@ -66,6 +67,7 @@ public interface Iterator<E> {
      *
      * @return the next element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
+     * 返回下一个元素
      */
     E next();
 
