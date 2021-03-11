@@ -25,9 +25,10 @@ public class ArrayListTest {
         Iterator<Integer> iterator = list.iterator();
         while (iterator.hasNext()){
             Integer integer = iterator.next();
-            if(integer==4){
+            if(integer==2){
                 iterator.remove();
             }
+            log.info(String.valueOf(integer));
         }
     }
 

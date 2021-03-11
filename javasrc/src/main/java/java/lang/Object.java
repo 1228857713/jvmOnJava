@@ -9,7 +9,8 @@ public class Object {
     private static native void registerNatives();
 
     /**
-     * 对象初始化时自动调用此方法
+     * 对象初始化时自动调用此方法(静态代码块是在初始化阶段中调用 clinit中执行的)
+     * 类加载 -> 连接（校验—>准备->解析） -> 初始化 -> 使用 -> 卸载
      */
     static {
         registerNatives();
@@ -100,7 +101,7 @@ public class Object {
 
     /**
      * 这个方法用于当对象被回收时调用，这个由JVM支持，Object的finalize方法默认是什么都没有做，如果子类需要在对象被回收时执行一些逻辑处理，则可以重写finalize方法。
-     * 像这种 protected 修饰的方法 一般就是永来 给子类继承修改的。
+     * 像这种 protected 修饰的方法 一般就是用了 给子类继承修改的。
      */
     protected void finalize() throws Throwable {
     }

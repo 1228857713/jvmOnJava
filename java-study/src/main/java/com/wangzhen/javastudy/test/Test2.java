@@ -1,5 +1,7 @@
 package com.wangzhen.javastudy.test;
 
+import java.util.Date;
+
 /**
  * Description:
  * Datetime:    2021/1/18   上午10:07
@@ -11,8 +13,8 @@ public class Test2 {
         //name ="b";
     }
     public static void main(String[] args) {
-        final int a=1;
-
+        System.out.println(new Date().getTime());
+        System.out.println(System.currentTimeMillis());
 
 
     }
