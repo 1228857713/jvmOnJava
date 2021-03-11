@@ -2248,6 +2248,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
     /**
      * Nodes for use in TreeBins
      * 在红黑树结构中存储实际的数据
+     *
      */
     static final class TreeNode<K, V> extends Node<K, V> {
         TreeNode<K, V> parent;  // red-black tree links

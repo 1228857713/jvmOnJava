@@ -761,12 +761,14 @@ public class ArrayList<E> extends AbstractList<E>
     }
 
     /**
-     * 通用的迭代器实现
+     * ArrayList 对迭代器的实现
+     * 在迭代器遍历数据的时候不能修改数据否则会报错。如果需要修改，应该使用线程安全的类
      */
     private class Itr implements Iterator<E> {
         int cursor;       //游标，下一个元素的索引，默认初始化为0
         int lastRet = -1; //上次访问的元素的位置
-        int expectedModCount = modCount;//迭代过程不运行修改数组，否则就抛出异常
+        //迭代过程不能修改数组，否则就抛出异常 （modCount = modifyCount 修改的数量）
+        int expectedModCount = modCount;
 
         //是否还有下一个
         public boolean hasNext() {
@@ -827,6 +829,8 @@ public class ArrayList<E> extends AbstractList<E>
 
         //检查数组是否被修改，如果在遍历的时候被修改了就会抛出 ConcurrentModificationException()
         final void checkForComodification() {
+            // 开始时 int expectedModCount = modCount;
+            //这里在查看两个值是否相等如果不相等那么就报错
             if (modCount != expectedModCount)
                 throw new ConcurrentModificationException();
         }

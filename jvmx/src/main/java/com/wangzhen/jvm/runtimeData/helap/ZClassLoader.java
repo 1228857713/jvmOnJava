@@ -153,6 +153,8 @@ public class ZClassLoader {
         clazz.staticVars = new Slots(clazz.staticSlotCount);
         for (ZField field : clazz.fileds) {
             // 如果是 static final 类型 那么就直接赋值
+            // 注意这里是基本变量和string类型的变量，而不是引用类型(对象类型)的变量。对象类型的变量还是在初始化
+            // 执行 clinit 方法时执行
             if (field.isStatic() && field.isFinal()) {
                  //报错了无法解决，暂时注释掉
                   initStaticFinalVar(clazz, field);

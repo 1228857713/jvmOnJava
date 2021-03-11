@@ -1,24 +1,19 @@
 package com.wangzhen.jvm;
 
+/**
+ * Description:
+ * Datetime:    2021/3/9   上午10:22
+ * Author:   王震
+ */
 public class App {
-    // 数组
-    final static int [] a =new int [10];
-    final static String s ="hello world";
-    final Test test1= new Test();
-    Test test2 =new Test();
+    int i=5;
+
+    private static final  App instance = new App();
+    public static App getInstance(){
+        return instance;
+    }
 
     public static void main(String[] args) {
-        App app = new App();
+        App instance = App.getInstance();
     }
-
-    public void test1(){
-
-    }
-
 }
-class Test{
-    static final int a = 10;
-
-
-}
-

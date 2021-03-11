@@ -15,7 +15,7 @@ public class TestUnsafe {
         long nameOffset = unsafe.objectFieldOffset(Person.class.getDeclaredField("name"));
         // compareAndSwapInt()
         // 1.操作的对象，参数的偏移量，原来的值，需要更新的值
-        unsafe.compareAndSwapInt(p,ageOffset,0,26);
+        unsafe.compareAndSwapInt(p,ageOffset,0,2 );
         unsafe.compareAndSwapObject(p,nameOffset,null,"王震");
         System.out.println(p.toString());
 
