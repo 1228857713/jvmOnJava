@@ -12,18 +12,19 @@ import java.io.IOException;
  * @author: 王震
  */
 public class FileUtils {
+    public static String className;
 
     public static String findClassByName (String dstClassName) throws IOException {
-        String className = findClassByName(Constant.DEFAULT_CLASS_PACKAGE, dstClassName);
+        findClassByName(Constant.DEFAULT_CLASS_PACKAGE, dstClassName);
         if(className==null){
-            className = findClassByName(Constant.DEFAULT_CLASS_PACKAGE, dstClassName);
+            findClassByName(Constant.DEFAULT_TEST_PACKAGE, dstClassName);
         }
         return className;
 
     }
-    public static String findClassByName (String dirName,String dstClassName) throws IOException {
+    public static void  findClassByName (String dirName,String dstClassName) throws IOException {
         if(dirName==null){
-            return null;
+            return ;
         }
         File file = new File(dirName);
         if(file.isDirectory()){
@@ -31,18 +32,18 @@ public class FileUtils {
             for (File temp : files) {
                 if(temp.isFile()){
                     if(temp.getName().equalsIgnoreCase(dstClassName)){
-                        return temp.getAbsolutePath();
+                        className = temp.getAbsolutePath();
                     }
                 }else {
-                    findClassByName(temp.getAbsolutePath(),dstClassName);
+                     findClassByName(temp.getAbsolutePath(),dstClassName);
                 }
 
             }
         }else {
             if(file.getName().equalsIgnoreCase(dstClassName)){
-                return dstClassName;
+                className = file.getAbsolutePath();
             }
         }
-        return null;
+
     }
 }

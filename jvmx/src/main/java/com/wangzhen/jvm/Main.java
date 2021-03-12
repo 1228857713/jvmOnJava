@@ -1,5 +1,6 @@
 package com.wangzhen.jvm;
 
+
 import com.wangzhen.jvm.classfile.classPath.ClassPath;
 import com.wangzhen.jvm.instructions.Interpreter;
 import com.wangzhen.jvm.runtimeData.ZFrame;
@@ -42,13 +43,16 @@ public class Main {
             if (cli.hasOption("h")){
                 HelpFormatter hf = new HelpFormatter();
                 hf.printHelp("Options", options);
+                return;
             }
             if(cli.hasOption("v")){
                 log.info("jdk1.8");
+                return;
             }
             if(cli.hasOption("jar")){
                 String []jarParameters = cli.getOptionValues("jar");
                 log.info(String.valueOf(Arrays.asList(jarParameters)));
+                return;
             }
             // java -jar jvm.jar -cp classes/com/wangzhen/jvm/ com.wangzhen.jvm.classfile.App.class
             // -cp classes/com.wangzhen.jvm.classfile.App com.wangzhen.jvm.classfile.App.class
@@ -59,10 +63,14 @@ public class Main {
 //                ClassFile classFile = new ClassFile(classFileData);
 //                System.out.println(classFile.toString());
                 startJvm(cpParameters);
+                return;
             }
 
-
-
+            // 如果上述参数都没有那么直接将启动class todo:写的太垃圾了
+            String[] strings =new String[2];
+            strings[0]="";
+            strings[1]=cli.getArgs()[0];
+            startJvm(strings);
         } catch (Exception e) {
             e.printStackTrace();
         }
