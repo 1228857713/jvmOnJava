@@ -111,6 +111,33 @@ import  java.util.*;
  * @jls 11.2 Compile-Time Checking of Exceptions
  * @since JDK1.0
  */
+/*
+ * Java应用层发生的异常
+ *
+ * 异常体系：
+ *                           Throwable
+ *                               |
+ *                    +----------+-----------+
+ *                    |                      |
+ *                Exception                Error
+ *                    |                      |
+ *        +-----------+-----------+         ...
+ *        |                       |
+ * RuntimeException              ...
+ *        |
+ *       ...
+ *
+ * Throwable       : 所有异常的祖先类
+ * RuntimeException: 运行时异常，或称非检查异常；这类异常意味着程序出现了难以恢复的错误，允许不进行捕获
+ * Exception中除了RuntimeException 的异常     : 除运行时异常之外的异常，或称检查异常；这类异常意味着程序出现错误时可能是允许被恢复的，需要在编译期就捕获，否则无法编译
+ * Error           : 非常严重的异常，该类异常往往意味着JVM内部出现了问题
+ *
+ * 在Java语言中，异常可以分为两类：Checked异常和Unchecked 异常。
+ * Unchecked异常包括java.lang.RuntimeException、 java.lang.Error以及它们的子类，
+ * 其他异常都是Checked异常。所有异常都最终继承自java.lang.Throwable。如果一个方法有可能导致 Checked异常抛出，
+ * 则该方法要么需要捕获该异常并妥善处理，要 么必须把该异常列在自己的throws子句中，否则无法通过编译。
+ * Unchecked异常没有这个限制。请注意，Java虚拟机规范并没有这个 规定，这只是Java语言的语法规则。
+ */
 public class Throwable implements Serializable {
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
     private static final long serialVersionUID = -3042686055658047285L;

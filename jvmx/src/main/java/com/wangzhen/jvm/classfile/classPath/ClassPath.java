@@ -1,8 +1,12 @@
 package com.wangzhen.jvm.classfile.classPath;
 
+import com.wangzhen.jvm.config.Constant;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 public class ClassPath {
     // jre 路径
     private String jreDir;
@@ -10,6 +14,11 @@ public class ClassPath {
     private Entry bootClasspath;
     private Entry extClasspath;
     private Entry userClasspath;
+
+    // 为了测试方便使用添加
+    private Entry DefaultClassPath;
+    private Entry TestClassPath;
+
     //parse()函数使用 -Xjre 选项解析启动类路径和扩展类路径
     // 使用-classpath/-cp选项解析用户类路径
     //以此来初始化成员变量的三种路径
@@ -18,6 +27,9 @@ public class ClassPath {
         bootClasspath = parseBootClasspath();
         extClasspath = parseExtClasspath();
         userClasspath = parseUserClasspath(cpOption);
+
+        DefaultClassPath = parseUserClasspath(Constant.DEFAULT_CLASS_PACKAGE);
+        TestClassPath = parseUserClasspath(Constant.DEFAULT_TEST_PACKAGE);
     }
 
 
@@ -73,10 +85,14 @@ public class ClassPath {
     public byte[] readClass(String className) {
         //注意，用命令行加载java文件时，只写文件名，所有这里统一为文件名后补上“.class”的后缀；
         if (className.endsWith(".class")) {
+            //log.debug("{}是以class文件结尾的不做处理");
             throw new RuntimeException("can't find or can't load the class: " + className);
+        }else {
+            String realName = className;
+            className = className.replace(".", "/");
+            className = className + ".class";
+            log.info("将文件路径进行处理，替换前{}替换为{}",realName,className);
         }
-        className = className.replace(".", "/");
-        className = className + ".class";
         byte[] data;
         try {
             //
@@ -89,7 +105,6 @@ public class ClassPath {
             if (data != null) {
                 return data;
             }
-
             data = userClasspath.readClass(className);
             if (data != null) {
                 return data;

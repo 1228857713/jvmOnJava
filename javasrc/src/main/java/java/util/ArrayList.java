@@ -762,7 +762,7 @@ public class ArrayList<E> extends AbstractList<E>
 
     /**
      * ArrayList 对迭代器的实现
-     * 在迭代器遍历数据的时候不能修改数据否则会报错。如果需要修改，应该使用线程安全的类
+     *
      */
     private class Itr implements Iterator<E> {
         int cursor;       //游标，下一个元素的索引，默认初始化为0
@@ -799,6 +799,7 @@ public class ArrayList<E> extends AbstractList<E>
                 ArrayList.this.remove(lastRet);
                 cursor = lastRet;
                 lastRet = -1;
+                // 删除该类会重新赋值所以 检查的时候不会报错
                 expectedModCount = modCount;
             } catch (IndexOutOfBoundsException ex) {
                 throw new ConcurrentModificationException();
