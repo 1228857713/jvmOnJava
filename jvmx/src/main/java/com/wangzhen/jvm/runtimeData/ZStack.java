@@ -13,7 +13,7 @@ public class ZStack {
     int maxSize;
 
     // 使用ArrayList 存放栈帧比较简单
-    private List<ZFrame> zFrames = new ArrayList<ZFrame>();
+    private List<ZFrame> frames = new ArrayList<ZFrame>();
 
     public ZStack(int maxSize) {
         this.maxSize = maxSize;
@@ -21,29 +21,31 @@ public class ZStack {
 
     public void push(ZFrame zFrame){
 
-        if(zFrames.size()>maxSize){
+        if(frames.size()>maxSize){
             throw new StackOverflowError("栈溢出异常");
         }
-        zFrames.add(zFrame);
+        frames.add(zFrame);
 
     }
     public ZFrame pop(){
-        if(zFrames.size()==0){
+        if(frames.size()==0){
             throw new EmptyStackException();
         }
-        ZFrame popjFrame = zFrames.remove(zFrames.size()-1);
+        ZFrame popjFrame = frames.remove(frames.size()-1);
         return popjFrame;
     }
     public ZFrame top(){
-        if(zFrames.size()==0){
+        if(frames.size()==0){
             throw new EmptyStackException();
         }
-        return zFrames.get(zFrames.size()-1);
+        return frames.get(frames.size()-1);
     }
 
     public boolean isEmpty(){
-        return zFrames.size()==0;
+        return frames.size()==0;
     }
 
-
+    public List<ZFrame> getFrames() {
+        return frames;
+    }
 }

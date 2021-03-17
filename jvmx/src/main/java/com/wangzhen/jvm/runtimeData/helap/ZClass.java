@@ -104,6 +104,9 @@ public class ZClass {
         }
         return "";
     }
+    public String getJavaName() {
+        return thisClassName.replace("/", ".");
+    }
 
 
     public int getAccessFlags() {

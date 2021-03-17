@@ -3,7 +3,7 @@ package com.wangzhen.jvm.instructions.references;
 
 
 /**
- * Description:
+ * Description: 测试异常相关的抛出情况
  * Datetime:    2021/3/11   下午3:42
  * Author:   王震
  */

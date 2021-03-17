@@ -2,6 +2,8 @@ package com.wangzhen.jvm.runtimeData;
 
 import com.wangzhen.jvm.runtimeData.helap.ZMethod;
 
+import java.util.Collections;
+
 /**
  *
  * 自定义线程：
@@ -46,6 +48,10 @@ public class ZThread {
 
     public boolean isStackEmpty() {
         return zstack.isEmpty();
+    }
+
+    public ZFrame[] getFrames() {
+        return (ZFrame[]) zstack.getFrames().toArray();
     }
     public void clearStack(){
         while (!zstack.isEmpty()){

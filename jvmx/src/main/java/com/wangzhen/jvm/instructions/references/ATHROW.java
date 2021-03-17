@@ -42,7 +42,7 @@ public class ATHROW extends NoOperandsInstruction {
                 currentFrame.setNextPC(handlerPC);
                 return true;
             }
-            // 如果走到这一步，说明当前线程无法处理该异常
+            // 如果走到这一步，说明当前线程无法处理该异常,如果thread为空那么直接跳出循环
             thread.popFrame();
             if(thread.isStackEmpty()){
                 return false;
