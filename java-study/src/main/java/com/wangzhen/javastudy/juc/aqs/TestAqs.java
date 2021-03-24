@@ -13,6 +13,7 @@ import java.util.concurrent.locks.Lock;
 @Slf4j
 public class TestAqs {
     public static void main(String[] args) {
+
         MyLock lock = new MyLock();
         new Thread(()->{
             lock.lock();

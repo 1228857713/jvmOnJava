@@ -1,6 +1,7 @@
 package com.wangzhen.javastudy.test;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description:
@@ -8,14 +9,13 @@ import java.util.Date;
  * Author:   王震
  */
 public class Test2 {
-    final String name ="3";
-    public void  a(){
-        //name ="b";
-    }
-    public static void main(String[] args) {
-        System.out.println(new Date().getTime());
-        System.out.println(System.currentTimeMillis());
+//    public int fn1(List<String> s){
+//        return 0;
+//    }
 
+    public void fn1(List<Integer> s){
 
     }
+
+
 }
