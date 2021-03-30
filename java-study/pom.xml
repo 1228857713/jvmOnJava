@@ -29,6 +29,9 @@
             <version>1.27</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-core -->
+
+
     </dependencies>
 
 </project>
